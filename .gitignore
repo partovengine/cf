@@ -1,0 +1,3 @@
+cf.out
+base/*.o
+user/*.o
