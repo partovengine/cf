@@ -483,9 +483,9 @@ bool ClientFramework::readInterfaceInformation (byte *buf, int index) {
     return false;
   }
   const char *ifName = reinterpret_cast < char * > (buf);
-  if (strcmp (ifName, "edu::sharif::partov::nss::map::interface::EthernetInterface") != 0
+  if (strcmp (ifName, "edu::sharif::partov::nse::map::interface::EthernetInterface") != 0
       && strcmp (ifName,
-          "edu::sharif::partov::nss::map::interface::EthernetPhysicalInterface") != 0) {
+          "edu::sharif::partov::nse::map::interface::EthernetPhysicalInterface") != 0) {
     std::cout << "[Failed]" << std::endl;
     std::cout
         << "+++ Initial negotiations failed (unknown interface type). [error code 19]"
