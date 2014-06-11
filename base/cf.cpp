@@ -848,14 +848,15 @@ bool ClientFramework::announceSimulationResume () {
 }
 
 bool ClientFramework::parseIP (std::string &ip, uint32 &res) const {
+  typedef std::string::size_type st_uint;
   ip.push_back ('.');
-  unsigned int dotPos = 0;
+  st_uint dotPos = 0;
   union {
     byte arr[4];
     uint32 ip;
   } val;
   for (int i = 0; i < 4; ++i) {
-    unsigned int ndp = ip.find ('.', dotPos);
+    st_uint ndp = ip.find ('.', dotPos);
     if (ndp == std::string::npos) {
       return false;
     }
