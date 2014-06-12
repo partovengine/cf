@@ -8,7 +8,7 @@
 ##
 #################################################
 
-COMPILER = g++
+CXX = g++
 FLAGS = -Wall -g -Ibase -Iuser
 LIBS = -lpthread
 
@@ -34,12 +34,13 @@ OBJECTS = ${BASE_OBJECTS} ${USER_OBJECTS}
 all: ${TARGET}
 
 ${TARGET}: ${OBJECTS}
-	${COMPILER} ${FLAGS} -o ${TARGET} ${OBJECTS} ${LIBS}
+	${CXX} ${FLAGS} -o ${TARGET} ${OBJECTS} ${LIBS}
 
 clean:
 	tmpfolder=`echo /tmp/CF-clean-$$$$.removed` && mkdir -p $$tmpfolder && touch a && mv -t $$tmpfolder/ a `for a in ${OBJECTS} ${TARGET} *~ base/*~ user/*~ ; do if [ -e $$a ]; then echo $$a; fi; done`
 
 .cpp.o:
-	${COMPILER} ${FLAGS} -c $< -o $@
+	${CXX} ${FLAGS} -c $< -o $@
 .c.o:
-	${COMPILER} ${FLAGS} -c $< -o $@
+	${CXX} ${FLAGS} -c $< -o $@
+
