@@ -71,7 +71,8 @@ protected:
     DisconnectCommand = 0,
     SendFrameCommand = 1,
     ChangeIPAddressCommand = 2,
-    ChangeNetmaskCommand = 3
+    ChangeNetmaskCommand = 3,
+    WalkOnFiniteStateMachineCommand = 5
   };
 
 private:
@@ -129,6 +130,8 @@ public:
 
   bool /* Synchronized */sendFrame (Frame frame, int ifaceIndex) const;
 
+  bool /* Synchronized */walk () const;
+
   bool /* Synchronized */notifyChangeOfIPAddress (uint32 newIP, int ifaceIndex) const;
   bool /* Synchronized */notifyChangeOfNetmask (uint32 newNetmask,
       int ifaceIndex) const;
@@ -136,6 +139,7 @@ public:
 protected:
   bool realSendFrame (Frame frame, int ifaceIndex) const;
 
+  bool realWalk () const;
   bool realNotifyChangeOfIPAddress (uint32 newIP, int ifaceIndex) const;
   bool realNotifyChangeOfNetmask (uint32 newNetmask, int ifaceIndex) const;
 

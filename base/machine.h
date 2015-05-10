@@ -56,6 +56,8 @@ public:
 
 	int getCountOfInterfaces () const;
 
+	bool /* Synchronized */ walk () const;
+
 	bool /* Synchronized */ sendFrame (Frame frame, int ifaceIndex) const;
 	virtual void processFrame (Frame frame, int ifaceIndex) = 0;
 };

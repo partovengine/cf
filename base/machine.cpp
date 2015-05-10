@@ -67,6 +67,10 @@ const std::string &Machine::getCustomInformation () const {
 	return customInfo;
 }
 
+bool Machine::walk () const {
+  return cf->walk ();
+}
+
 bool Machine::sendFrame (Frame frame, int ifaceIndex) const {
 	return cf->sendFrame (frame, ifaceIndex);
 }

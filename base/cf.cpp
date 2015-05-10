@@ -687,6 +687,14 @@ bool ClientFramework::sendFrame (Frame frame, int ifaceIndex) const {
   return res;
 }
 
+bool ClientFramework::walk () const {
+  pthread_mutex_lock (&mutex);
+  bool res = realWalk ();
+  pthread_mutex_unlock (&mutex);
+
+  return res;
+}
+
 bool ClientFramework::notifyChangeOfIPAddress (uint32 newIP, int ifaceIndex) const {
   pthread_mutex_lock (&mutex);
   bool res = realNotifyChangeOfIPAddress (newIP, ifaceIndex);
@@ -736,10 +744,21 @@ if  (frame.length < 14 || frame.length >= ((1 << 16) - sizeof(uint32))) {
   return true;
 }
 
+bool ClientFramework::realWalk () const {
+  uint32 command = htonl (WalkOnFiniteStateMachineCommand);
+  byte *mybuf = (byte *) &command;
+
+  if (!sendOrReceive (true, -1, sizeof(command), mybuf)) {
+    std::cout << "Error while sending walk on FSM command. [error code 45]" << std::endl;
+    return false;
+  }
+  return true;
+}
+
 bool ClientFramework::realNotifyChangeOfIPAddress (uint32 newIP, int ifaceIndex) const {
   byte mybuf[3 * sizeof(uint32)];
 
-byte  *buf = mybuf;
+  byte  *buf = mybuf;
   (*reinterpret_cast<uint32 *> (buf)) = htonl (ChangeIPAddressCommand);
   buf += sizeof(uint32);
 
