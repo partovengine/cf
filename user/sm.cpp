@@ -28,6 +28,7 @@
 #include "frame.h"
 
 #include <netinet/in.h>
+#include <netinet/ip.h> // for iphdr struct
 
 using namespace std;
 
@@ -70,8 +71,16 @@ void SimulatedMachine::initialize () {
  */
 void SimulatedMachine::processFrame (Frame frame, int ifaceIndex) {
 	// TODO: process the raw frame; frame.data points to the frame's byte stream
-	cout << "Frame received at iface " << ifaceIndex <<
+	cerr << "Frame received at iface " << ifaceIndex <<
 		" with length " << frame.length << endl;
+  struct ethernet_header {
+    byte  dst[6];
+    byte  src[6];
+    uint16 type;
+  } __attribute__ ((packed));
+
+  ethernet_header *eth = (ethernet_header *) frame.data;
+  cerr << "Ethernet type field is 0x" << std::hex << ntohs (eth->type) << endl;
 }
 
 
@@ -81,6 +90,36 @@ void SimulatedMachine::processFrame (Frame frame, int ifaceIndex) {
  */
 void SimulatedMachine::run () {
 	// TODO: write your business logic here...
+  struct ethernet_header {
+    byte  dst[6];
+    byte  src[6];
+    uint16 type;
+  } __attribute__ ((packed));
+
+  const int frameLength = sizeof (ethernet_header) + 100;
+  byte *data = new byte[frameLength];
+
+  ethernet_header *eth = (ethernet_header *) data;
+  memset (eth->dst, 255, 6); // broadcast address
+  memcpy (eth->src, iface[0].mac, 6);
+  eth->type = htons (0x0800);
+
+  iphdr *packet = (iphdr *) (data + sizeof (ethernet_header));
+  packet->version = 4;
+  packet->ihl = 5;
+  packet->tot_len = htons (100);
+
+  Frame frame (frameLength, data);
+  sendFrame (frame, 0); // sends frame on interface 0
+  delete[] data;
+  cerr << "now ./free.sh and check the pcap log file to see the sent packet" << endl;
+
+  std::string command;
+  while (cin >> command) {
+    if (command == "walk") {
+      walk ();
+    }
+  }
 }
 
 
