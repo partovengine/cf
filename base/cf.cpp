@@ -24,8 +24,8 @@
 
 #include "cf.h"
 
-#include "sm.h"
 #include "frame.h"
+#include "machine.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -170,7 +170,9 @@ inline void ClientFramework::checkForRedundantArgument (bool &mark) const {
 }
 
 inline void ClientFramework::parseUserProgramArguments (int argc, char *argv[]) const {
-  SimulatedMachine::parseArguments (argc, argv);
+  void SimulatedMachineParseArguments (int argc, char *argv[]);
+
+  SimulatedMachineParseArguments (argc, argv);
 }
 
 bool ClientFramework::connectToServer () {
@@ -457,7 +459,9 @@ bool ClientFramework::doInterfacesInformationSynchronizationNegotiations (byte *
       std::cout << "+++ Initial negotiations failed. [error code 16]" << std::endl;
       return false;
     }
-    machine = new SimulatedMachine (this, count);
+    Machine *instantiateSimulatedMachine (const ClientFramework *cf, int count);
+
+    machine = instantiateSimulatedMachine (this, count);
     for (int i = 0; i < count; ++i) {
       if (!readInterfaceInformation (buffer, i)) {
         return false;

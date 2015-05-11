@@ -9,7 +9,7 @@
 #################################################
 
 CXX = g++
-FLAGS = -Wall -g -Ibase -Iuser
+FLAGS = -Wall -g -Ibase
 LIBS = -lpthread
 
 TARGET = cf.out
@@ -21,7 +21,8 @@ BASE_SOURCES = base/main.cpp \
 	base/frame.cpp
 
 # DO NOT LIST .H FILES HERE! JUST .C AND .CPP FILES
-USER_SOURCES = user/sm.cpp
+USER_SOURCES = user/sm.cpp \
+	user/facade.cpp
 
 BASE_OBJ = ${BASE_SOURCES:.cpp=.o}
 BASE_OBJECTS = ${BASE_OBJ:.c=.o}
