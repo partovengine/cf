@@ -20,6 +20,8 @@ BASE_SOURCES = base/main.cpp \
 	base/machine.cpp \
 	base/frame.cpp
 
+ARCHIVE_PREFIX = CF
+
 # DO NOT LIST .H FILES HERE! JUST .C AND .CPP FILES
 USER_SOURCES = user/sm.cpp \
 	user/facade.cpp
@@ -39,6 +41,9 @@ ${TARGET}: ${OBJECTS}
 
 clean:
 	tmpfolder=`echo /tmp/CF-clean-$$$$.removed` && mkdir -p $$tmpfolder && touch a && mv -t $$tmpfolder/ a `for a in ${OBJECTS} ${TARGET} *~ base/*~ user/*~ ; do if [ -e $$a ]; then echo $$a; fi; done`
+
+archive:
+	zip -r ${ARCHIVE_PREFIX}_`date +%s`.zip user/*.{c,cpp,h} Makefile
 
 .cpp.o:
 	${CXX} ${FLAGS} -c $< -o $@
