@@ -260,7 +260,7 @@ bool ClientFramework::doMapSelectingNegotiations (byte *buf) {
   if (needNewMap != 0) {
     creatorId = userName;
   }
-  if (3 * sizeof(uint16) + mapName.length () + creatorId.length () + sizeof(int32)
+  if (3 * sizeof(uint16) + mapName.length () + 1 + creatorId.length () + 1 + sizeof(int32)
       > FRAME_BUFFER_SIZE) {
     std::cout << "[Failed]" << std::endl;
     std::cout << "+++ Map name is too long." << std::endl;
