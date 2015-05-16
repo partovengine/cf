@@ -3,7 +3,7 @@
  * Partov is a simulation engine, supporting emulation as well,
  * making it possible to create virtual networks.
  *  
- * Copyright © 2009-2014 Behnam Momeni.
+ * Copyright © 2009-2015 Behnam Momeni.
  * 
  * This file is part of the Partov.
  * 
@@ -952,9 +952,9 @@ void ClientFramework::usage () const {
   std::cout << "   \\ \\_\\ \\__/.\\_\\\\ \\_\\  \\ \\__\\ \\____/\\ \\___/     \\ \\____/ \\ \\_\\ "         << std::endl;
   std::cout << "    \\/_/\\/__/\\/_/ \\/_/   \\/__/\\/___/  \\/__/       \\/___/   \\/_/ "                    << std::endl;
   std::cout << "                                                                "                             << std::endl;
-  std::cout << "Partov Project - Version 3.1 -- Client Framework"                  << std::endl;
+  std::cout << "Partov Project - Version 3.4.0 -- Client Framework"                  << std::endl;
   std::cout << "Code-name: PARTOV (Portable And Reliable Tool fOr Virtualization)" << std::endl;
-  std::cout << "Copyright © 2009-2014 Behnam Momeni."                              << std::endl;
+  std::cout << "Copyright © 2009-2015 Behnam Momeni."                              << std::endl;
   std::cout << std::endl;
   std::cout << "Usage:"                         << std::endl;
   std::cout << "  " << progName << " <options>" << std::endl;
