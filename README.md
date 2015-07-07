@@ -1,7 +1,7 @@
 # CF
 
 The _Client Framework (CF)_ speaks with _PartovNSE_ (the server) using _SCFCP_ (a protocol over TCP) to instantiate/release virtual topologies and to remotely expand virtual nodes' behavior, running on the server, by dictating internal logic of _SimulatedNode_ plugin instances.
-Latest stable version of CF is **3.4.0**.
+Latest stable version of CF is **3.4.1**.
 
 This repo contains two main folders:
 
