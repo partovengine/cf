@@ -817,6 +817,10 @@ bool ClientFramework::sendOrReceive (bool sendIt, int errorCode, int size,
     } else {
       count = recv (sfd, buf, size, 0);
     }
+    if (count == 0) {
+      std::cout << "+++ Connection is closed." << std::endl;
+      systemInterrupt (SIGINT);
+    }
     if (count < 0) {
       if (errorCode == -1) {
         return false;
